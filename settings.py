@@ -25,3 +25,10 @@ LGBM_PARAMS = {
     "random_state": 42,
     "verbose": -1,
 }
+
+# Target Labels
+TARGET_LABELS = {
+    0: "Neither group profitable — consider not running this campaign",
+    1: "Target Group 1 — higher predicted ROI",
+    2: "Target Group 2 — higher predicted ROI",
+}

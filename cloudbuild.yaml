@@ -1,5 +1,5 @@
 steps:
-  # Step 1 — Run tests
+  # Step 1 — Train model and run tests
   - name: 'python:3.11-slim'
     entrypoint: 'bash'
     args:
@@ -8,6 +8,7 @@ steps:
         apt-get update && apt-get install -y libgomp1 -q
         pip install -r requirements.txt -q
         pip install -e . -q
+        python train.py
         pytest tests/ -v
 
   # Step 2 — Build API image

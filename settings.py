@@ -32,3 +32,6 @@ TARGET_LABELS = {
     1: "Target Group 1 — higher predicted ROI",
     2: "Target Group 2 — higher predicted ROI",
 }
+
+# API Endpoint
+API_URL = "https://marketing-api-198390148696.europe-west1.run.app"

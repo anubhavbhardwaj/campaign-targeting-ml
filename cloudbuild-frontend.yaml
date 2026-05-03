@@ -1,0 +1,5 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-f', 'frontend/Dockerfile', '-t', 'europe-west1-docker.pkg.dev/anubhaviiitb/campaign-targeting/frontend:latest', '.']
+images:
+  - 'europe-west1-docker.pkg.dev/anubhaviiitb/campaign-targeting/frontend:latest'

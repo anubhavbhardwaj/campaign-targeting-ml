@@ -1,5 +1,23 @@
 steps:
+  # Step 1 — Build frontend image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-f', 'frontend/Dockerfile', '-t', 'europe-west1-docker.pkg.dev/anubhaviiitb/campaign-targeting/frontend:latest', '.']
+    args: ['build', '-f', 'frontend/Dockerfile', 
+           '-t', 'europe-west1-docker.pkg.dev/anubhaviiitb/campaign-targeting/frontend:latest', '.']
+
+  # Step 2 — Push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-west1-docker.pkg.dev/anubhaviiitb/campaign-targeting/frontend:latest']
+
+  # Step 3 — Deploy
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args: [
+      'gcloud', 'run', 'deploy', 'campaign-targeting-frontend',
+      '--image', 'europe-west1-docker.pkg.dev/anubhaviiitb/campaign-targeting/frontend:latest',
+      '--platform', 'managed',
+      '--region', 'europe-west1',
+      '--allow-unauthenticated',
+      '--port', '8080'
+    ]
+
 images:
   - 'europe-west1-docker.pkg.dev/anubhaviiitb/campaign-targeting/frontend:latest'

@@ -5,6 +5,7 @@ steps:
     args:
       - '-c'
       - |
+        apt-get update && apt-get install -y libgomp1 -q
         pip install -r requirements.txt -q
         pip install -e . -q
         pytest tests/ -v
@@ -39,4 +40,4 @@ images:
   - 'europe-west1-docker.pkg.dev/anubhaviiitb/campaign-targeting/api:latest'
 
 options:
-  logging: NONE
+  logging: CLOUD_LOGGING_ONLY

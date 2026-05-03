@@ -1,0 +1,39 @@
+steps:
+  # Step 1 — Run tests
+  - name: 'python:3.11-slim'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        pip install -r requirements.txt -q
+        pip install -e . -q
+        pytest tests/ -v
+
+  # Step 2 — Build API image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', 'europe-west1-docker.pkg.dev/anubhaviiitb/campaign-targeting/api:latest',
+      '.'
+    ]
+
+  # Step 3 — Push API image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push',
+      'europe-west1-docker.pkg.dev/anubhaviiitb/campaign-targeting/api:latest'
+    ]
+
+  # Step 4 — Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    args: [
+      'gcloud', 'run', 'deploy', 'campaign-targeting-api',
+      '--image', 'europe-west1-docker.pkg.dev/anubhaviiitb/campaign-targeting/api:latest',
+      '--platform', 'managed',
+      '--region', 'europe-west1',
+      '--allow-unauthenticated',
+      '--port', '8080'
+    ]
+
+images:
+  - 'europe-west1-docker.pkg.dev/anubhaviiitb/campaign-targeting/api:latest'

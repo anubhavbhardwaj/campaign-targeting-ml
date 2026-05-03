@@ -23,4 +23,4 @@ images:
   - 'europe-west1-docker.pkg.dev/anubhaviiitb/campaign-targeting/frontend:latest'
 
 options:
-  logging: CLOUD_LOGGING_ONLY
+  logging: NONE

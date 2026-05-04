@@ -4,6 +4,7 @@
 In this exercise we are given historical data of marketing campaigns a retail company ran and the outcome of each of the campaign, weather Group(1) gave a better ROI, or Group (2) gave a better ROI, or Neither of them. The task is the first create a Machine Learning Model that can predict which of the Groups, if any, will give a better ROI for the campaign, productionalizing this solution in the cloud to provide an API interface for the model usage and a frontend application for business interaction of the solution. 
 
 ## Project Structure
+```text
 ├── Dockerfile
 ├── README.md
 ├── cloudbuild-frontend.yaml
@@ -41,6 +42,7 @@ In this exercise we are given historical data of marketing campaigns a retail co
 │   ├── test_predictor.py
 │   └── test_processor.py
 └── train.py
+```
 
 
 ## Important Model Notes
@@ -50,50 +52,80 @@ In this exercise we are given historical data of marketing campaigns a retail co
 
 ## Running the API locally
 1. In the terminal, first create a virtual environment, activate it, and install the requirements.
+```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -e .
 pip install -r requirements.txt
+```
 
 2. Train the Model
+```bash
 python train.py
+```
 
 3. Run the API locally using uvicorn
+```bash
 uvicorn src.api.app:app --host 0.0.0.0 --port 8080
+```
 
 
 ## Running the frontend(Streamlit) app locally
 1. Install dependencies
+```bash
 pip install -r requirements-frontend.txt
+```
 
 2. Run the Streamlit app
+```bash
 streamlit run frontend/app.py
+```
 
 The frontend will open at http://localhost:8501
+
 Make sure to run API before running the streamlit app. Update the settings 'API_URL' to point to the right API endpoint. 
 
 ## Running tests
+```bash
 pytest tests/ -v
-
+```
 
 ## API Endpoints
 
 ### Health Check
-GET /health
-Returns: {"status": "ok"}
+**GET** `/health`
+
+Response:
+```json
+{
+  "status": "ok"
+}
+```
 
 ### Predict
-POST /predict
+**POST** `/predict`
+
 Body:
+```json
 {
     "group1": {"values": [20 floats]},
     "group2": {"values": [20 floats]},
     "comparator": {"values": [27 floats]}
 }
-Returns: prediction, recommendation, confidence, probabilities
+```
+Returns:
+```
+{
+  "prediction": <str>,
+  "recommendation": <str>,
+  "confidence": <float>,
+  "probabilities": : <dict(str:float)>
+}
+```
 
 ## Live Endpoints
 API:      https://marketing-api-198390148696.europe-west1.run.app
+
 Frontend: https://campaign-targeting-frontend-198390148696.europe-west1.run.app
 
 

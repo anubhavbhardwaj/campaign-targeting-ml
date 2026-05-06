@@ -130,10 +130,16 @@ Frontend: https://campaign-targeting-frontend-198390148696.europe-west1.run.app
 
 
 ## Production Notes
-- In production, features are computed via a dbt transformation stored in Vertex AI feature Store or Bigquery
-- Model training runs on Vertex AI custom Training Job
-- Model artifact stored in Vertex AI Model Registry
-- Model monitoring happens via Vertex Model Monitoring
-- Retraining is scheduled using Cloud Schedular and triggered by Vertex AI Model Monitoring drift alerts
-- Infrastructure is managed via terraform
-- CI/CD via Cloud Build triggers on push to main
+
+What production adds beyond the challenge scope:
+
+- Vertex AI Pipelines for automated training orchestration
+- Vertex AI Feature Store (or BigQuery) for online feature serving, with features computed via dbt transformations
+- Vertex AI Model Registry for model versioning and rollback
+- Cloud Scheduler for triggering regular retraining
+- Vertex AI Model Monitoring for drift detection and alerting
+- Terraform for Infrastructure as Code
+- Shadow → Canary → A/B test deployment strategy
+- Structured logging via Python logging integrated with Cloud Logging
+- Feature schema enforcement at training and inference to prevent silent errors
+- CI/CD via Cloud Build triggers on push to main (current scope)

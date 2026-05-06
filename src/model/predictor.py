@@ -16,7 +16,8 @@ class Predictor:
             return pickle.load(f)
 
     def predict(self, pred_request: PredictionRequest):
-        X = np.array(pred_request.group1.values +    # ← no self.
+        """Assemble features in training order, runs inference and returns prediction"""
+        X = np.array(pred_request.group1.values + 
                  pred_request.group2.values +
                  pred_request.comparator.values).reshape(1, -1)
         

@@ -1,15 +1,15 @@
 import pickle
 
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
+from sklearn.model_selection import cross_val_score, train_test_split
 
 import lightgbm as lgb
 
-from settings import LGBM_PARAMS, MODELS_DIR
+from settings import LGBM_PARAMS, MODEL_PATH
 from src.data.processor import DataProcessor
 
 
-class ModelTrainer():
+class ModelTrainer:
     def __init__(self, processor: DataProcessor, model = None):
         self.processor = processor
         self.model = model or lgb.LGBMClassifier(**LGBM_PARAMS)
@@ -17,6 +17,15 @@ class ModelTrainer():
         self.X_test = None
         self.y_train = None
         self.y_test = None
+    
+    def _cross_validate(self, X, y) -> None:
+        """Validate model architecture before full training."""
+        cv_model = lgb.LGBMClassifier(**LGBM_PARAMS)
+        scores = cross_val_score(
+            cv_model, X, y,
+            cv=5, scoring='f1_macro', n_jobs=-1
+        )
+        print(f"CV F1 macro: {scores.mean():.3f} ± {scores.std():.3f}")
     
     def _split_data(self, X, y):
         # Split the data into training and testing sets
@@ -35,7 +44,6 @@ class ModelTrainer():
         ))
 
     def _save(self):
-        MODEL_PATH = MODELS_DIR / "model.pkl"
         MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
         
         with open(MODEL_PATH, 'wb') as f:
@@ -46,6 +54,7 @@ class ModelTrainer():
     def train(self):
         self.processor.load_data()
         X, y = self.processor.preprocess_data()
+        self._cross_validate(X, y)
         self._split_data(X, y)
         self._fit()
         self._evaluate()

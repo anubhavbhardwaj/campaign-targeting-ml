@@ -20,7 +20,7 @@ def test_preprocess_data(processor):
     assert X is not None, "Features (X) should not be None."
     assert y is not None, "Target variable (y) should not be None."
 
-    assert X.shape[1] == 67, "Features (X) should have 66 columns."
+    assert X.shape[1] == 67, "Features (X) should have 67 columns."
 
 def test_excluded_columns(processor):
     X, y = processor.preprocess_data()

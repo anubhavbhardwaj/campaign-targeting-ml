@@ -1,7 +1,7 @@
 # Campaign Targeting ML
 
 ## Goal of the Project
-In this exercise we are given historical data of marketing campaigns a retail company ran and the outcome of each of the campaign, weather Group(1) gave a better ROI, or Group (2) gave a better ROI, or Neither of them. The task is the first create a Machine Learning Model that can predict which of the Groups, if any, will give a better ROI for the campaign, productionalizing this solution in the cloud to provide an API interface for the model usage and a frontend application for business interaction of the solution. 
+In this exercise we are given historical data of marketing campaigns a retail company ran and the outcome of each of the campaign, whether Group(1) gave a better ROI, or Group (2) gave a better ROI, or Neither of them. The task is the first create a Machine Learning Model that can predict which of the Groups, if any, will give a better ROI for the campaign, productionalizing this solution in the cloud to provide an API interface for the model usage and a frontend application for business interaction of the solution. 
 
 ## Project Structure
 ```text

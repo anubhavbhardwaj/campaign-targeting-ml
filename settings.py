@@ -38,4 +38,4 @@ TARGET_LABELS = {
 }
 
 # API Endpoint
-API_URL = "https://marketing-api-198390148696.europe-west1.run.app"
+API_URL = "https://campaign-targeting-api-198390148696.europe-west1.run.app"

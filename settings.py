@@ -32,9 +32,9 @@ LGBM_PARAMS = {
 
 # Target Labels
 TARGET_LABELS = {
-    0: "Neither group profitable — consider not running this campaign",
-    1: "Target Group 1 — higher predicted ROI",
-    2: "Target Group 2 — higher predicted ROI",
+    0: "Neither group profitable: consider not running this campaign",
+    1: "Target Group 1: higher predicted ROI",
+    2: "Target Group 2: higher predicted ROI",
 }
 
 # API Endpoint

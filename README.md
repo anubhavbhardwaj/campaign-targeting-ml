@@ -124,7 +124,7 @@ Returns:
 ```
 
 ## Live Endpoints
-API:      https://marketing-api-198390148696.europe-west1.run.app
+API:      https://campaign-targeting-api-198390148696.europe-west1.run.app
 
 Frontend: https://campaign-targeting-frontend-198390148696.europe-west1.run.app
 

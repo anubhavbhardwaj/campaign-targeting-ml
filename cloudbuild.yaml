@@ -37,6 +37,28 @@ steps:
       '--port', '8080'
     ]
 
+  # Step 5 — Compile pipeline YAML and upload to GCS
+  - name: 'python:3.11-slim'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        apt-get update && apt-get install -y -q
+        pip install kfp==2.16.1 google-cloud-aiplatform==1.152.0 -q
+        cd src/pipelines
+        PYTHONPATH=../../ python -c "
+        from kfp import compiler
+        from pipeline import retraining_pipeline
+        compiler.Compiler().compile(
+            pipeline_func=retraining_pipeline,
+            package_path='/workspace/campaign_targeting_pipeline.yaml'
+        )
+        print('Pipeline compiled successfully')
+        "
+        gsutil cp /workspace/campaign_targeting_pipeline.yaml \
+          gs://anubhaviiitb-pipeline-artifacts/pipelines/campaign_targeting_pipeline.yaml
+        echo "Pipeline YAML uploaded to GCS"
+
 images:
   - 'europe-west1-docker.pkg.dev/anubhaviiitb/campaign-targeting/api:latest'
 

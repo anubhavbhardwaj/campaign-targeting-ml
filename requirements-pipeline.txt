@@ -1,0 +1,6 @@
+kfp==2.16.1
+google-cloud-aiplatform==1.152.0
+google-cloud-bigquery==3.41.0
+google-cloud-bigquery-storage==2.38.0
+db-dtypes==1.6.0
+pandas==2.3.3

@@ -1,4 +1,4 @@
-from kfp.v2 import dsl
+from kfp import dsl
 from components.data_validation import validate_data
 from components.train_model import train_model
 from components.evaluate_model import evaluate_model
@@ -16,6 +16,7 @@ def retraining_pipeline(
     region: str,
     model_display_name: str,
     f1_threshold: float = 0.48,
+    data_version: str = "",
 ):
     validation_step = validate_data(
         project_id=project_id,
@@ -39,4 +40,5 @@ def retraining_pipeline(
         project_id=project_id,
         region=region,
         model_display_name=model_display_name,
+        data_version=data_version,
     )

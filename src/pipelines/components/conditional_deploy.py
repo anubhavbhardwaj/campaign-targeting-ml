@@ -46,6 +46,7 @@ def conditional_deploy(
         ),
         labels={
             "stage": "staging",
+            "model-type": "campaign-targeting",
             "f1-macro": str(round(f1_macro, 4)).replace(".", "-"),
             "f1-class0-neither": str(round(f1_class0, 4)).replace(".", "-"),
             "data-version": data_version.replace(".", "-"),

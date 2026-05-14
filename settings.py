@@ -15,6 +15,9 @@ TARGET_COLUMN = "target"
 
 POST_CAMPAIGN_FEATURES = ["g1_21", "g2_21", "c_28"]
 
+# Model Type
+MODEL_TYPE = os.environ.get("MODEL_TYPE", "campaign-targeting")
+
 # Model Parameters
 LGBM_PARAMS = {
     "n_estimators": 300,

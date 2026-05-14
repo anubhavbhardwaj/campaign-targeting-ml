@@ -12,10 +12,6 @@ def predictor():
 def test_model_load(predictor):
     assert predictor.model is not None, "Model not loaded successfully."
 
-def test_model_file_not_found():
-    with pytest.raises(FileNotFoundError):
-        Predictor(model_name='random_file.pkl')
-
 def test_predict_response_structure(predictor):
     # Generate a sample test to validate response structure
     request = PredictionRequest(

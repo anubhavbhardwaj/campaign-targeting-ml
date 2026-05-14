@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 # Project Paths
@@ -39,3 +40,10 @@ TARGET_LABELS = {
 
 # API Endpoint
 API_URL = "https://campaign-targeting-api-198390148696.europe-west1.run.app"
+
+
+# GCP Config Variables
+GCP_PROJECT_ID = os.environ.get("GCP_PROJECT_ID", "anubhaviiitb")
+GCP_REGION = os.environ.get("GCP_REGION", "europe-west1")
+BQ_DATASET_ID = os.environ.get("BQ_DATASET_ID", "campaign_targeting")
+BQ_TABLE_ID = os.environ.get("BQ_TABLE_ID", "features")

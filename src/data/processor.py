@@ -27,7 +27,7 @@ class DataProcessor:
             SELECT * EXCEPT({', '.join(POST_CAMPAIGN_FEATURES)})
             FROM `{GCP_PROJECT_ID}.{BQ_DATASET_ID}.{BQ_TABLE_ID}`
         """
-        self.df = client.query(query).to_dataframe()
+        self.df = client.query(query).to_dataframe(create_bqstorage_client=False)
         print(f"Data loaded from BigQuery: {self.df.shape}")
 
 

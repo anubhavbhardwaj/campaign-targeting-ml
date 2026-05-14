@@ -33,9 +33,9 @@ def run_pipeline():
             "region": GCP_REGION,
             "model_display_name": MODEL_DISPLAY_NAME,
             "f1_threshold": 0.48,
-            "data_version": datetime.now()
+            "data_version": datetime.now().strftime("%Y-%m")
         },
-        enable_caching=True,
+        enable_caching=False,
     )
 
     job.submit()

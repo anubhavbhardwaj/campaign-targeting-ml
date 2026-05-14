@@ -10,3 +10,5 @@ google-cloud-bigquery-storage==2.38.0
 db-dtypes==1.6.0
 pytest==9.0.3
 httpx==0.28.1
+google-cloud-aiplatform==1.152.0
+google-cloud-storage==2.18.0

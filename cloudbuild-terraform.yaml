@@ -1,0 +1,14 @@
+steps:
+  - name: 'hashicorp/terraform:1.5'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        cd terraform
+        terraform init
+        terraform apply -auto-approve \
+          -var="project_id=anubhaviiitb" \
+          -var="region=europe-west1"
+
+options:
+  logging: CLOUD_LOGGING_ONLY

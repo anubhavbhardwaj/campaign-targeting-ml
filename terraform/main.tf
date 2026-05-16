@@ -30,16 +30,18 @@ resource "google_service_account" "cloud_run_api" {
   project      = var.project_id
 }
 
-# Grant BigQuery read access
-resource "google_project_iam_member" "cloud_run_bq_viewer" {
+resource "google_project_iam_binding" "cloud_run_bq_viewer" {
   project = var.project_id
   role    = "roles/bigquery.dataViewer"
-  member  = "serviceAccount:${google_service_account.cloud_run_api.email}"
+  members = [
+    "serviceAccount:${google_service_account.cloud_run_api.email}"
+  ]
 }
 
-# Grant Model Registry access
-resource "google_project_iam_member" "cloud_run_vertex_user" {
+resource "google_project_iam_binding" "cloud_run_vertex_user" {
   project = var.project_id
   role    = "roles/aiplatform.user"
-  member  = "serviceAccount:${google_service_account.cloud_run_api.email}"
+  members = [
+    "serviceAccount:${google_service_account.cloud_run_api.email}"
+  ]
 }

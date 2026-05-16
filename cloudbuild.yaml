@@ -59,6 +59,18 @@ steps:
           gs://anubhaviiitb-pipeline-artifacts/pipelines/campaign_targeting_pipeline.yaml
         echo "Pipeline YAML uploaded to GCS"
 
+# Step 6 — Terraform apply
+  - name: 'hashicorp/terraform:1.5'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        cd terraform
+        terraform init
+        terraform apply -auto-approve \
+          -var="project_id=anubhaviiitb" \
+          -var="region=europe-west1"
+
 images:
   - 'europe-west1-docker.pkg.dev/anubhaviiitb/campaign-targeting/api:latest'
 
